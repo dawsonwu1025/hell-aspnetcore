@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ingress-hello-aspnetcore-deployment
+spec:
+  selector:
+    matchLabels:
+      app: ingress-hello-aspnetcore-pod
+  template:
+    metadata:
+      labels:
+        app: ingress-hello-aspnetcore-pod
+    spec:
+      containers:
+      - name: ingress-hello-aspnetcore-container
+        image: asepcorewebapi.azurecr.io/hello-aspnetcore:#{Build.BuildNumber}#
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80
