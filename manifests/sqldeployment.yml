@@ -21,15 +21,15 @@ spec:
         ports:
         - containerPort: 1433
         env:
-        - name: sql-webapi.database.windows.net
+        - name: MSSQL_PID
           value: "Standard"
         - name: ACCEPT_EULA
           value: "Y"
         - name: SA_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: aetosllcadmin
-              key: CodeChalleng2020!
+              name: mssql
+              key: SA_PASSWORD
         volumeMounts:
         - name: mssqldb
           mountPath: /var/opt/mssql
