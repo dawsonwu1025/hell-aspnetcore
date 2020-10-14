@@ -2,9 +2,11 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: dbclaim
+  annotations:
+    volume.beta.kubernetes.io/storage-class: azure-disk
 spec:
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   resources:
     requests:
-      storage: 1Gi
+      storage: 8Gi
