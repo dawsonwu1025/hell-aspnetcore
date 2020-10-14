@@ -1,8 +1,20 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: Pod
 metadata:
   name: mssql-deployment
 spec:
+  initContainers:
+  - name: volume-permissions
+    image: busybox
+    command: ["sh", "-c", "chown -R 10001:0 /var/opt/mssql"]
+    volumeMounts:
+    - mountPath: "/var/opt/mssql"
+      name: sqldata-storage
+  volumes:
+  - name: sqldata-storage
+    persistentVolumeClaim:
+      claimName: dbclaim
+
   replicas: 1
   selector:
      matchLabels:
@@ -28,12 +40,5 @@ spec:
         - name: SA_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: mssql
+              name: sql-password
               key: SA_PASSWORD
-        volumeMounts:
-        - name: mssqldb
-          mountPath: /var/opt/mssql
-      volumes:
-      - name: mssqldb
-        persistentVolumeClaim:
-          claimName: mssql-data
