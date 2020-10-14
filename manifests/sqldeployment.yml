@@ -14,7 +14,6 @@ spec:
   - name: sqldata-storage
     persistentVolumeClaim:
       claimName: dbclaim
-
   replicas: 1
   selector:
      matchLabels:
