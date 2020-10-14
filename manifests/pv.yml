@@ -4,7 +4,7 @@ metadata:
   name: sqldata
 spec:
   capacity:
-    storage: 1Gi
+    storage: 8Gi
   accessModes:
     - ReadWriteMany
   hostPath:
