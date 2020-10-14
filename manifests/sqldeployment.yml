@@ -4,10 +4,6 @@ metadata:
   name: mssql-deployment
 spec:
   replicas: 1
-#  initContainers:
-#  - name: volume-permissions
-#    image: busybox
-#    command: ["sh", "-c", "chown -R 10001:0 /var/opt/mssql"]
     volumeMounts:
     - mountPath: "/var/opt/mssql"
       name: sqldata-storage
